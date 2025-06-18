@@ -12,7 +12,8 @@
   margin-bottom: 1rem;
 }
 
-.filtros input {
+.filtros input,
+.filtros select {
   padding: 0.5rem;
   min-width: 160px;
 }
