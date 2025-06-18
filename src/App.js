@@ -5,6 +5,10 @@ import axios from 'axios';
 function App() {
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
+  const [priceMin, setPriceMin] = useState('');
+  const [priceMax, setPriceMax] = useState('');
+  const [bedMin, setBedMin] = useState('');
+  const [bathMin, setBathMin] = useState('');
   const [graficoBase64, setGraficoBase64] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -15,8 +19,12 @@ function App() {
       const response = await axios.get('https://backend-pi-59mq.onrender.com/grafico-preco', {
         params: {
           cidade,
-          estado
-        }
+          estado,
+          price_min: priceMin,
+          price_max: priceMax,
+          bed_min: bedMin,
+          bath_min: bathMin,
+        },
       });
 
       console.log("Resposta da API:", response.data);
@@ -46,6 +54,30 @@ function App() {
           placeholder="Estado"
           value={estado}
           onChange={(e) => setEstado(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Preço mínimo"
+          value={priceMin}
+          onChange={(e) => setPriceMin(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Preço máximo"
+          value={priceMax}
+          onChange={(e) => setPriceMax(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Quartos mínimos"
+          value={bedMin}
+          onChange={(e) => setBedMin(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Banheiros mínimos"
+          value={bathMin}
+          onChange={(e) => setBathMin(e.target.value)}
         />
       </div>
 
