@@ -39,8 +39,8 @@ src/
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/frontend-analise-imoveis.git
-cd frontend-analise-imoveis
+git clone https://github.com/seu-usuario/frontend-pi.git
+cd frontend-pi
 ```
 
 2. Instale as dependências:
@@ -48,14 +48,14 @@ cd frontend-analise-imoveis
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+3. Inicie o servidor com:
 ```bash
-npm run dev
+npm start
 ```
 
 4. Acesse a aplicação:
 ```
-http://localhost:5173/
+http://localhost:3000/
 ```
 
 ## 🔐 Autenticação
