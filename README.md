@@ -1,5 +1,5 @@
 
-# Projeto Frontend – Análise de Imóveis
+# Frontend – Análise de Imóveis
 
 Este projeto corresponde à interface frontend do sistema de análise de imóveis. Ele permite que usuários se registrem, façam login e visualizem gráficos baseados em dados imobiliários consumidos de uma API backend. A interface é interativa e responsiva, com filtros para personalizar a análise.
 
