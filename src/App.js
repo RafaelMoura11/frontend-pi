@@ -16,17 +16,17 @@ function App() {
   const gerarGrafico = async () => {
     setLoading(true);
 
+    const params = {};
+
+    if (estado) params.estado = estado;
+    if (cidade) params.cidade = cidade;
+    if (priceMin) params.price_min = priceMin;
+    if (priceMax) params.price_max = priceMax;
+    if (bedMin) params.bed_min = bedMin;
+    if (bathMin) params.bath_min = bathMin;
+
     try {
-      const response = await axios.get('https://backend-pi-59mq.onrender.com/grafico-preco', {
-        params: {
-          cidade,
-          estado,
-          price_min: priceMin,
-          price_max: priceMax,
-          bed_min: bedMin,
-          bath_min: bathMin,
-        },
-      });
+      const response = await axios.get('https://backend-pi-59mq.onrender.com/grafico-preco', { params });
 
       setGraficoBase64(response.data.image);
     } catch (error) {
