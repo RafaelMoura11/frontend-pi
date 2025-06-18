@@ -1,70 +1,93 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Projeto Frontend – Análise de Imóveis
 
-## Available Scripts
+Este projeto corresponde à interface frontend do sistema de análise de imóveis. Ele permite que usuários se registrem, façam login e visualizem gráficos baseados em dados imobiliários consumidos de uma API backend. A interface é interativa e responsiva, com filtros para personalizar a análise.
 
-In the project directory, you can run:
+## 🔍 Funcionalidades
 
-### `npm start`
+- Registro e login de usuários com autenticação via token JWT.
+- Tela de login protegida que redireciona para a área de gráficos após autenticação.
+- Visualização de gráfico interativo com base nos seguintes filtros:
+  - Estado e cidade (dependentes entre si)
+  - Faixa de preço
+  - Quantidade mínima de quartos e banheiros
+- Integração com a API backend hospedada no Render.
+- Layout responsivo utilizando Bootstrap.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🧰 Tecnologias Utilizadas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React
+- Bootstrap
+- Axios
+- JavaScript (ES6+)
 
-### `npm test`
+## 📂 Estrutura de Pastas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+│
+├── App.jsx            # Componente principal que controla autenticação e navegação
+├── Login.jsx          # Tela de login com integração à API
+├── Register.jsx       # Tela de cadastro de novo usuário
+├── Protected.jsx      # Componente com filtros e visualização de gráfico
+├── estadosCidades.js  # Mapeamento de estados e cidades usadas nos filtros
+├── api.js             # Instância do Axios com token JWT
+└── App.css            # Estilização adicional
+```
 
-### `npm run build`
+## 🚀 Como Executar Localmente
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/frontend-analise-imoveis.git
+cd frontend-analise-imoveis
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Instale as dependências:
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-### `npm run eject`
+4. Acesse a aplicação:
+```
+http://localhost:5173/
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔐 Autenticação
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Ao realizar o login com sucesso, o token JWT é salvo no `localStorage` e incluído nas requisições subsequentes para rotas protegidas.
+- O componente `Protected.jsx` só é exibido se o token estiver presente.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🌎 Integração com a API
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+A aplicação se comunica com o backend através da URL:
 
-## Learn More
+```
+https://backend-pi-59mq.onrender.com/
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Os endpoints utilizados são:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `POST /register` – Cadastro de usuários
+- `POST /login` – Login e recebimento de token
+- `GET /grafico-preco` – Retorna imagem do gráfico baseado nos filtros
 
-### Code Splitting
+## ✅ Validações
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Todos os campos de registro e login são obrigatórios.
+- Campos de filtro (como preço, estado, cidade) são opcionais e a aplicação funciona mesmo sem nenhum filtro.
 
-### Analyzing the Bundle Size
+## 📌 Observações
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- O layout foi feito com componentes do Bootstrap para garantir responsividade e uma aparência agradável.
+- O botão "Gerar gráfico" é desabilitado durante o carregamento para evitar múltiplas requisições.
+- A autenticação protege o acesso à funcionalidade principal de análise.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Desenvolvido como parte de um projeto integrador com FastAPI e React 🚀
