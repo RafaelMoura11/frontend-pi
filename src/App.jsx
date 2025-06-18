@@ -1,29 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Login from './Login';
-import Protected from './Protected';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './Register';
 
 function App() {
-  const [logado, setLogado] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setLogado(!!token);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLogado(false);
-  };
+  const [isRegistering, setIsRegistering] = useState(false);
 
   return (
-    <div className="App">
-      {logado ? (
-        <>
-          <button onClick={handleLogout}>Sair</button>
-          <Protected />
-        </>
+    <div className="container">
+      <h1 className="my-4 text-center">Análise de Imóveis</h1>
+      {isRegistering ? (
+        <Register onSwitchToLogin={() => setIsRegistering(false)} />
       ) : (
-        <Login onLoginSuccess={() => setLogado(true)} />
+        <div className="text-center">
+          {/* Aqui você colocaria o seu componente de Login */}
+          <p>Você ainda não tem uma conta?</p>
+          <button className="btn btn-secondary" onClick={() => setIsRegistering(true)}>Criar Conta</button>
+        </div>
       )}
     </div>
   );
