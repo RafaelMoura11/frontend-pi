@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './Register';
-import Login from './Login'; // ✅ Importação do Login
+import Login from './Login';
+import Protected from './Protected';
 
 function App() {
   const [isRegistering, setIsRegistering] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   if (isAuthenticated) {
-    return <p className="text-center mt-5">🎉 Login realizado com sucesso!</p>;
-    // aqui depois você pode redirecionar para o conteúdo protegido ou dashboard
+    return <Protected onLogout={handleLogout} />;
   }
 
   return (
