@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import estadosCidades from './estadosCidades'; // você criará esse arquivo
 
 function App() {
-  const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
+  const [cidade, setCidade] = useState('');
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
   const [bedMin, setBedMin] = useState('');
@@ -27,9 +28,7 @@ function App() {
         },
       });
 
-      console.log("Resposta da API:", response.data);
       setGraficoBase64(response.data.image);
-
     } catch (error) {
       console.error('Erro ao gerar gráfico:', error.response?.data || error.message);
       alert('Erro ao gerar gráfico. Ver console para detalhes.');
@@ -43,42 +42,27 @@ function App() {
       <h1>Análise de Imóveis</h1>
 
       <div className="filtros">
-        <input
-          type="text"
-          placeholder="Cidade"
-          value={cidade}
-          onChange={(e) => setCidade(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Estado"
-          value={estado}
-          onChange={(e) => setEstado(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Preço mínimo"
-          value={priceMin}
-          onChange={(e) => setPriceMin(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Preço máximo"
-          value={priceMax}
-          onChange={(e) => setPriceMax(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Quartos mínimos"
-          value={bedMin}
-          onChange={(e) => setBedMin(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Banheiros mínimos"
-          value={bathMin}
-          onChange={(e) => setBathMin(e.target.value)}
-        />
+        <select value={estado} onChange={(e) => {
+          setEstado(e.target.value);
+          setCidade(''); // reseta cidade ao mudar estado
+        }}>
+          <option value="">Selecione um estado</option>
+          {Object.keys(estadosCidades).sort().map((uf) => (
+            <option key={uf} value={uf}>{uf}</option>
+          ))}
+        </select>
+
+        <select value={cidade} onChange={(e) => setCidade(e.target.value)} disabled={!estado}>
+          <option value="">Selecione uma cidade</option>
+          {estado && estadosCidades[estado].map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+
+        <input type="number" placeholder="Preço mínimo" value={priceMin} onChange={(e) => setPriceMin(e.target.value)} />
+        <input type="number" placeholder="Preço máximo" value={priceMax} onChange={(e) => setPriceMax(e.target.value)} />
+        <input type="number" placeholder="Quartos mínimos" value={bedMin} onChange={(e) => setBedMin(e.target.value)} />
+        <input type="number" placeholder="Banheiros mínimos" value={bathMin} onChange={(e) => setBathMin(e.target.value)} />
       </div>
 
       <button onClick={gerarGrafico} disabled={loading}>
