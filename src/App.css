@@ -5,10 +5,14 @@
 }
 
 .filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
   margin-bottom: 1rem;
 }
 
 .filtros input {
-  margin: 0 0.5rem;
   padding: 0.5rem;
+  min-width: 160px;
 }
